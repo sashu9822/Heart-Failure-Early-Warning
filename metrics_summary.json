@@ -1,0 +1,96 @@
+{
+  "dataset_type": "synthetic only",
+  "input_file": "data/measurements_only.csv",
+  "input_columns_used": [
+    "date",
+    "day_index_0_based",
+    "foot_impedance_ohm",
+    "heart_rate_signal_quality",
+    "impedance_signal_quality",
+    "patient_id",
+    "resting_hr_bpm",
+    "weight_kg",
+    "weight_signal_quality"
+  ],
+  "label_leakage_control": "Rule engine accepts only measurements file; labels are merged after predictions for evaluation.",
+  "split": {
+    "seed": 20261025,
+    "method": "70/30 stratified by event-assignment group; patient-level split, all days for a patient remain in one split",
+    "development_patients": 210,
+    "held_out_test_patients": 90
+  },
+  "rule_parameters": {
+    "baseline": "median of first 7 valid observations separately for weight and resting HR",
+    "weight_trigger": "weight >= personal baseline +2.0%",
+    "resting_hr_trigger": "resting HR >= personal baseline +15.0%",
+    "persistence": "at least 2 threshold exceedances among the last 3 valid evaluated sessions for that signal",
+    "one_persistent_signal": "WATCH",
+    "both_persistent_signals": "ELEVATED_PATTERN",
+    "impedance": "Recorded and quality-checked, but not used for alerting because the hardware front-end is not verified",
+    "normal_state": "NO_RULE_TRIGGER means no configured rule fired; it is not a medical all-clear",
+    "missing_or_unverified": "INSUFFICIENT_DATA or CALIBRATING; not normal"
+  },
+  "development_metrics": {
+    "patients_in_split": 210,
+    "daily_records": 18900,
+    "event_cases": 52,
+    "events_caught_during_synthetic_worsening": 32,
+    "event_sensitivity_patient_level": 0.6153846153846154,
+    "median_lead_days_among_caught_events": 2.0,
+    "worsening_day_sensitivity_all_post_calibration_days": 0.34615384615384615,
+    "specificity_on_weight_hr_evaluable_synthetic_normal_days": 0.9315579227696404,
+    "evaluable_normal_days": 15020,
+    "false_alert_days_on_evaluable_normal_days": 1028,
+    "overall_accuracy_on_evaluable_days_only": 0.9199190706174128,
+    "evaluable_days_for_accuracy": 15322,
+    "weight_hr_evaluable_coverage_post_calibration": 0.8790590935169248,
+    "false_alert_episode_starts_on_synthetic_normal_days": 290,
+    "false_alert_episodes_per_patient_month_all_post_calibration_days": 0.5064185312679288,
+    "alert_state_counts": {
+      "INSUFFICIENT_DATA": 16198,
+      "CALIBRATING": 1421,
+      "WATCH": 1104,
+      "ELEVATED_PATTERN": 177
+    },
+    "warning_rate_on_synthetic_worsening_days": 0.34615384615384615,
+    "interpretation": "Synthetic-only estimates; not clinical accuracy. A no-alert output is not a declaration of medical normality."
+  },
+  "held_out_test_metrics": {
+    "patients_in_split": 90,
+    "daily_records": 8100,
+    "event_cases": 23,
+    "events_caught_during_synthetic_worsening": 9,
+    "event_sensitivity_patient_level": 0.391304347826087,
+    "median_lead_days_among_caught_events": 2.0,
+    "worsening_day_sensitivity_all_post_calibration_days": 0.24203821656050956,
+    "specificity_on_weight_hr_evaluable_synthetic_normal_days": 0.9389229078348249,
+    "evaluable_normal_days": 6369,
+    "false_alert_days_on_evaluable_normal_days": 389,
+    "overall_accuracy_on_evaluable_days_only": 0.9238095238095239,
+    "evaluable_days_for_accuracy": 6510,
+    "weight_hr_evaluable_coverage_post_calibration": 0.8714859437751004,
+    "false_alert_episode_starts_on_synthetic_normal_days": 105,
+    "false_alert_episodes_per_patient_month_all_post_calibration_days": 0.4278363453815261,
+    "alert_state_counts": {
+      "INSUFFICIENT_DATA": 6998,
+      "CALIBRATING": 616,
+      "WATCH": 425,
+      "ELEVATED_PATTERN": 61
+    },
+    "warning_rate_on_synthetic_worsening_days": 0.24203821656050956,
+    "interpretation": "Synthetic-only estimates; not clinical accuracy. A no-alert output is not a declaration of medical normality."
+  },
+  "held_out_evaluable_day_confusion_matrix": {
+    "TP": 34,
+    "FP": 389,
+    "TN": 5980,
+    "FN": 107
+  },
+  "limitations": [
+    "All measurements and labels are synthetic and hand-specified; metrics measure agreement with the simulator's labels, not clinical accuracy.",
+    "No validated clinical thresholds are implied by +2% weight or +15% resting heart rate.",
+    "Foot-to-foot impedance is not used in alert decisions until the physical measurement circuit and safety are verified.",
+    "No real patient, sensor, BCG, ECG or hospital outcome validation is included.",
+    "A no-alert output cannot rule out deterioration; clinical review and local medical guidance remain necessary."
+  ]
+}

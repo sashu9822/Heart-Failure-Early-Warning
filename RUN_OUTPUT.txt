@@ -1,0 +1,36 @@
+{
+  "development_patients": 210,
+  "held_out_test_patients": 90,
+  "held_out_test_metrics": {
+    "patients_in_split": 90,
+    "daily_records": 8100,
+    "event_cases": 23,
+    "events_caught_during_synthetic_worsening": 9,
+    "event_sensitivity_patient_level": 0.391304347826087,
+    "median_lead_days_among_caught_events": 2.0,
+    "worsening_day_sensitivity_all_post_calibration_days": 0.24203821656050956,
+    "specificity_on_weight_hr_evaluable_synthetic_normal_days": 0.9389229078348249,
+    "evaluable_normal_days": 6369,
+    "false_alert_days_on_evaluable_normal_days": 389,
+    "overall_accuracy_on_evaluable_days_only": 0.9238095238095239,
+    "evaluable_days_for_accuracy": 6510,
+    "weight_hr_evaluable_coverage_post_calibration": 0.8714859437751004,
+    "false_alert_episode_starts_on_synthetic_normal_days": 105,
+    "false_alert_episodes_per_patient_month_all_post_calibration_days": 0.4278363453815261,
+    "alert_state_counts": {
+      "INSUFFICIENT_DATA": 6998,
+      "CALIBRATING": 616,
+      "WATCH": 425,
+      "ELEVATED_PATTERN": 61
+    },
+    "warning_rate_on_synthetic_worsening_days": 0.24203821656050956,
+    "interpretation": "Synthetic-only estimates; not clinical accuracy. A no-alert output is not a declaration of medical normality."
+  },
+  "confusion_matrix": {
+    "TP": 34,
+    "FP": 389,
+    "TN": 5980,
+    "FN": 107
+  },
+  "output_dir": "/mnt/data/SteadyStep_Alert_Logic_Results_v5/results"
+}

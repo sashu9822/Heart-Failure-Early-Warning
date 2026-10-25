@@ -1,0 +1,1 @@
+Dashboard integration is intentionally outside this firmware release. The firmware saves session summaries locally and can send SMS. It does not connect to Wi-Fi, HTTP, MQTT or a browser dashboard yet. Those interfaces will be added only after the user requests dashboard integration and selects where the backend will run.

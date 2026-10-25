@@ -1,0 +1,10 @@
+test_bad_quality_weight_does_not_count_as_valid_observation (test_rule_logic.SteadyStepRuleTests.test_bad_quality_weight_does_not_count_as_valid_observation) ... ok
+test_both_persistent_changes_become_elevated_pattern (test_rule_logic.SteadyStepRuleTests.test_both_persistent_changes_become_elevated_pattern) ... ok
+test_no_trigger_is_not_called_normal_when_impedance_unverified (test_rule_logic.SteadyStepRuleTests.test_no_trigger_is_not_called_normal_when_impedance_unverified) ... ok
+test_rule_engine_rejects_label_leakage (test_rule_logic.SteadyStepRuleTests.test_rule_engine_rejects_label_leakage) ... ok
+test_weight_only_persistent_change_becomes_watch (test_rule_logic.SteadyStepRuleTests.test_weight_only_persistent_change_becomes_watch) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.030s
+
+OK
